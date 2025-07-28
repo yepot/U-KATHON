@@ -5,6 +5,7 @@ import com.ukathon.kongtteok.global.exception.ExceptionCode;
 import com.ukathon.kongtteok.global.exception.KongtteokException;
 import com.ukathon.kongtteok.user.domain.User;
 import com.ukathon.kongtteok.user.dto.request.CreateUserRequest;
+import com.ukathon.kongtteok.user.dto.request.LoginRequest;
 import com.ukathon.kongtteok.user.dto.response.CreateUserResponse;
 import com.ukathon.kongtteok.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -28,4 +29,16 @@ public class UserService {
         return CreateUserResponse.from(userRepository.save(user));
     }
 
+    // 로그인
+    public User login(LoginRequest request) {
+
+        User user = userRepository.findByHandle(request.getHandle())
+                .orElseThrow(() -> new KongtteokException(ExceptionCode.USER_NOT_FOUND));
+
+        if (!user.getPassword().equals(request.getPassword())) {
+            throw new KongtteokException(ExceptionCode.PASSWORD_MISMATCH);
+        }
+
+        return user;
+    }
 }

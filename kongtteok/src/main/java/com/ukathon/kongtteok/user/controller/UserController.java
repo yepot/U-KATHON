@@ -1,6 +1,8 @@
 package com.ukathon.kongtteok.user.controller;
 
+import com.ukathon.kongtteok.user.domain.User;
 import com.ukathon.kongtteok.user.dto.request.CreateUserRequest;
+import com.ukathon.kongtteok.user.dto.request.LoginRequest;
 import com.ukathon.kongtteok.user.dto.response.CreateUserResponse;
 import com.ukathon.kongtteok.user.service.UserService;
 import jakarta.validation.Valid;
@@ -19,10 +21,19 @@ public class UserController {
 
     private final UserService userService;
 
-    //사용자 생성: POST /users
-    @PostMapping
+    @PostMapping("/signup")
     public ResponseEntity<CreateUserResponse> createUser(@Valid @RequestBody CreateUserRequest request) {
         CreateUserResponse response = userService.createUser(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody LoginRequest request) {
+        try {
+            User user = userService.login(request);
+            return ResponseEntity.ok(user);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(e.getMessage());
+        }
     }
 }

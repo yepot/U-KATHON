@@ -7,6 +7,7 @@ public class KongtteokException extends RuntimeException {
     private final ExceptionCode exceptionCode;
 
     public KongtteokException(ExceptionCode exceptionCode) {
+        super(exceptionCode.getMessage());
         this.exceptionCode = exceptionCode;
     }
 
