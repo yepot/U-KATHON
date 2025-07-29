@@ -13,6 +13,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.time.LocalDateTime;
 import java.util.Map;
 
 @Service
@@ -116,7 +117,7 @@ public class NewsCrawlerService {
                         .title(title)
                         .description(description)
                         .link(link)
-                        .pubDate(pubDate)
+                        .pubDate(LocalDateTime.parse(pubDate))
                         .image(image)
                         .groupName(groupName)
                         .build();
@@ -144,6 +145,6 @@ public class NewsCrawlerService {
         } catch (Exception e) {
             System.out.println("이미지 파싱 실패: " + url);
         }
-        return "https://yourdomain.com/default-thumbnail.png";
+        return "https://api.newsto.r-e.kr//default.png";
     }
 }
