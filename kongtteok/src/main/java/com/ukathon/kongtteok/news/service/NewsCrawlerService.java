@@ -85,7 +85,7 @@ public class NewsCrawlerService {
     public void fetchAndSaveNews(String keyword, String groupName) {
         try {
             String apiUrl = "https://openapi.naver.com/v1/search/news.json?query=" + keyword +
-                    "&display=50&start=1&sort=date";
+                    "&display=10&start=1&sort=date";
 
             HttpHeaders headers = new HttpHeaders();
             headers.set("X-Naver-Client-Id", CLIENT_ID);

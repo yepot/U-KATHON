@@ -35,4 +35,16 @@ public class NewsService {
                 .map(NewsResponse::from)
                 .collect(Collectors.toList());
     }
+
+    public List<NewsResponse> getLatestNewsAll() {
+        return newsRepository.findTop10ByOrderByPubDateDesc().stream()
+                .map(NewsResponse::from)
+                .toList();
+    }
+
+    public List<NewsResponse> getRandomNewsAll() {
+        return newsRepository.findRandomNews().stream()
+                .map(NewsResponse::from)
+                .toList();
+    }
 }
