@@ -1,0 +1,53 @@
+name: Deploy to Amazon EC2
+
+on:
+  push:
+    branches: [ "main" ]  # ← 너가 원하는 브랜치명으로 바꿔줘
+
+env:
+  AWS_REGION: ap-northeast-2
+
+jobs:
+  deploy:
+    name: Deploy to EC2
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Make application.yml
+        run: |
+          mkdir -p ./newsTo/src/main/resources
+          echo "${{ secrets.APPLICATION_YML }}" > ./newsTo/src/main/resources/application.yml
+
+      - name: Build with Gradle
+        run: |
+          cd newsTo
+          chmod +x ./gradlew
+          ./gradlew build -x test
+
+      - name: Deploy to EC2 using SSH
+        uses: appleboy/scp-action@v0.1.4
+        with:
+          host: 13.125.46.77
+          username: ubuntu
+          key: ${{ secrets.EC2_SSH_KEY }}
+          source: "./newsTo/build/libs/*.jar"
+          target: "/home/ubuntu/app"  
+
+      - name: Restart EC2 App
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: 13.125.46.77
+          username: ubuntu
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            pkill -f 'java' || true
+            nohup java -jar /home/ubuntu/app/*.jar > /home/ubuntu/app/nohup.out 2>&1 &
