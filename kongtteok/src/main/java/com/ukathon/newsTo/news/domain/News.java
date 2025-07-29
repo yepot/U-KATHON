@@ -3,6 +3,8 @@ package com.ukathon.newsTo.news.domain;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Getter
 @Setter
@@ -23,7 +25,7 @@ public class News {
     @Column(length = 1000)
     private String description;
 
-    private String pubDate;
+    private LocalDateTime pubDate;
 
     @Column(length = 1000)
     private String image;
