@@ -1,7 +1,6 @@
 package com.ukathon.newsTo.user.dto.response;
 
 import com.ukathon.newsTo.user.domain.User;
-import com.ukathon.newsTo.user.domain.UserStatus;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -12,7 +11,6 @@ public class CreateUserResponse {
     private String username;
     private String handle;
     private String password;
-    private UserStatus status;
 
     public static CreateUserResponse from(User user) {
         return CreateUserResponse.builder()
@@ -20,7 +18,6 @@ public class CreateUserResponse {
                 .username(user.getUsername())
                 .handle(user.getHandle())
                 .password(user.getPassword())
-                .status(user.getStatus())
                 .build();
     }
 

@@ -20,7 +20,6 @@ public class NewsResponse {
                 .description(news.getDescription())
                 .link(news.getLink())
                 .image(news.getImage())
-                .pubDate(news.getPubDate())
                 .groupName(news.getGroupName())
                 .build();
     }

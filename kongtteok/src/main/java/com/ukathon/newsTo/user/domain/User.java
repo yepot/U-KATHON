@@ -26,15 +26,11 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-    @Enumerated(EnumType.STRING)
-    private UserStatus status;
-
     @Builder
-    public User(String username, String handle, String password, UserStatus status){
+    public User(String username, String handle, String password){
         this.username = username;
         this.handle = handle;
         this.password = password;
-        this.status = status;
     }
 
 }

@@ -34,9 +34,4 @@ public class UserController {
         }
     }
 
-//    @PatchMapping("/{userId}/status")
-//    public ResponseEntity<UserStatusResponse> updateStatus(@PathVariable Long id,
-//                                                           @RequestBody StatusUpdateRequest request) {
-//        return ResponseEntity.ok(userService.updateUserStatus(id, request.getStatus()));
-//    }
 }
