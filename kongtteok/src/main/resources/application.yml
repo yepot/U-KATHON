@@ -4,9 +4,18 @@ spring:
     url: jdbc:mysql://localhost:3306/kongtteok?createDatabaseIfNotExist=true&characterEncoding=UTF-8&characterSetResults=UTF-8
     username: root
     password: mdmstj2395!
+  main:
+    allow-bean-definition-overriding: true
 
   jpa:
     hibernate:
       ddl-auto: update
     generate-ddl: true
     show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+  jackson:
+     serialization:
+      fail-on-empty-beans: false
