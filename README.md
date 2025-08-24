@@ -1,6 +1,7 @@
 # 📰 News To. 📰
-#### 나만의 진실을 넘어서, 다양한 시각을 선물하다
 역필터버블을 활용해 다양한 시각을 제시하는 뉴스 플랫폼, News To.
+
+<img width="992" height="557" alt="image" src="https://github.com/user-attachments/assets/53634c6d-5d82-4dc6-80ea-b1d200e14147" />
 
 ## 📌 프로젝트 소개
 2025 U-KATHON: 404 not found 3조 콩떡이  
